@@ -17,13 +17,13 @@ public class TasaDtoRequestConsulta implements Serializable{
 	
 
 	@JsonProperty("codMonedaOrigen")
-	@NotEmpty(message=CodRespuesta.CDE1004)
-	@Pattern(regexp=ParamConfig.CODMONEDA, message=CodRespuesta.CDE1004)
+	@NotEmpty(message=CodRespuesta.CDE1009)
+	@Pattern(regexp=ParamConfig.CODMONEDA, message=CodRespuesta.CDE1009)
 	private String codMonedaOrigen;
 	
 	@JsonProperty("codMonedaDestino")
-	@NotEmpty(message=CodRespuesta.CDE1004)
-	@Pattern(regexp=ParamConfig.CODMONEDA, message=CodRespuesta.CDE1004)
+	@NotEmpty(message=CodRespuesta.CDE1010)
+	@Pattern(regexp=ParamConfig.CODMONEDA, message=CodRespuesta.CDE1010)
 	private String codMonedaDestino;
 	
 	/**

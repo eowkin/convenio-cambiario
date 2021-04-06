@@ -10,7 +10,7 @@ public class Codigos {
 		public static final String C0000 = "0000";
 		public static final String C0001 = "0001";
 		
-		//entrada
+		//entrada moneda
 		public static final String CDE1000 = "1000";
 		public static final String CDE1001 = "1001";
 		public static final String CDE1002 = "1002";
@@ -20,6 +20,12 @@ public class Codigos {
 		public static final String CDE1006 = "1006";
 		public static final String CDE1007 = "1007";
 		public static final String CDE1008 = "1008";
+		
+		
+		//entrada tasa
+		public static final String CDE1009 = "1009";
+		public static final String CDE1010 = "1010";
+		
 		
 		////GENERAL
     	public static final String CME6000 = "6000";
@@ -75,11 +81,17 @@ public class Codigos {
 	@Data
 	public class Servicios{
 		
-		
+		//monedas
 		public static final String MONEDASURLV1       = "/v1/parametros/monedas";
 		public static final String PRUEBAMONEDASURLV1       = "/v11/parametros/monedas";
 		public static final String MONEDAIDURLV1       = "/v1/parametros/monedas/{codMoneda}";
 		public static final String PRUEBAMONEDAIDURLV1       = "/v11/parametros/monedas/{codMoneda}";
+		
+		//tasas
+		public static final String TASASURLV1       = "/v1/parametros/tasas";
+		public static final String TASASPARAMETERURLV1       = "/v1/parametros/tasas/codMonedaOrigen/{codMonedaOrigen}/codMonedaDestino/{codMonedaDestino}";
+		public static final String TASASPARAMETERCODMONEDAORIGENURLV1       = "/v1/parametros/tasas/codMonedaOrigen/{codMonedaOrigen}";
+		public static final String TASASPARAMETERCODMONEDADESTINOURLV1       = "/v1/parametros/tasas/codMonedaDestino/{codMonedaDestino}";
 		
 		
 		//Monedas

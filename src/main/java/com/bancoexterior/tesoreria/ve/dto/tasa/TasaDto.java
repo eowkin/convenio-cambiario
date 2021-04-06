@@ -1,5 +1,6 @@
 package com.bancoexterior.tesoreria.ve.dto.tasa;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,8 +12,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class TasaDto {
+public class TasaDto implements Serializable{
 	
+	
+
 	@JsonProperty("codMonedaOrigen")
 	private String codMonedaOrigen;
 	
@@ -38,5 +41,10 @@ public class TasaDto {
 		
 		
 	}
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }
 

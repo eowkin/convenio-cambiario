@@ -21,8 +21,13 @@ public interface ITasaRepository extends JpaRepository<Tasa, TasaPk>{
 		public List<TasaDto> getAll();
 		
 		
+		@Query(value = queryAll + " and t.id.codMonedaOrigen = ?1")
+		public List<TasaDto> getTasaByCodMonedaOrigen(String codMonedaOrigen);
+		
+		@Query(value = queryAll + " and t.id.codMonedaDestino = ?1")
+		public List<TasaDto> getTasaByCodMonedaDestino(String codMonedaDestino);
+	
 		@Query(value = queryAll + " and t.id.codMonedaOrigen = ?1 and t.id.codMonedaDestino = ?2")
 		public List<TasaDto> getTasaByCodMonedaOrigenAndCodMonedaDestino(String codMonedaOrigen, String codMonedaDestino);
-	
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bancoexterior.tesoreria.ve.dto.limitesGenerales.LimitesGeneralesDto;
 import com.bancoexterior.tesoreria.ve.entities.LimitesGenerales;
 import com.bancoexterior.tesoreria.ve.service.ILimitesGeneralesService;
 
@@ -20,8 +21,15 @@ public class LimitesGeneralesController {
 	@Autowired
 	private ILimitesGeneralesService limitesService;
 	
-	@GetMapping
+	@GetMapping("/prueba")
 	public List<LimitesGenerales> findAll(){
 		return limitesService.findAll();
 	}
+	
+	@GetMapping("/dto")
+	public List<LimitesGeneralesDto> findAllDto(){
+		return limitesService.findAllDto();
+	}
+	
+	
 }
