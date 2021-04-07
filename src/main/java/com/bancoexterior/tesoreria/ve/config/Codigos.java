@@ -93,6 +93,13 @@ public class Codigos {
 		public static final String TASASPARAMETERCODMONEDAORIGENURLV1       = "/v1/parametros/tasas/codMonedaOrigen/{codMonedaOrigen}";
 		public static final String TASASPARAMETERCODMONEDADESTINOURLV1       = "/v1/parametros/tasas/codMonedaDestino/{codMonedaDestino}";
 		
+		//limitesGenerales
+		public static final String LIMITESGENERALESURLV1       = "/v1/parametros/limites";
+		public static final String LIMITESGENERALESPARAMETERIDURLV1       = "/v1/parametros/limites/codMoneda/{codMoneda}/tipoTransaccion/{tipoTransaccion}/naturaleza/{naturaleza}";
+		public static final String LIMITESGENERALESALLPARAMETERURLV1       = "/v1/parametros/limites/codMoneda/{codMoneda}/tipoTransaccion/{tipoTransaccion}/naturaleza/{naturaleza}/flagActivo/{flagActivo}";
+		
+		//limitesGenerales
+		public static final String LIMITESUSUARIOSURLV1       = "/v1/parametros/limitesusuarios";
 		
 		//Monedas
 		public static final String MONEDAS            = "Convenio1-Moneda";

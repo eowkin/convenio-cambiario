@@ -114,9 +114,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	@Override
 	protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
-		// TODO Auto-generated method stub
+
 		
-		log.info("hablame manito");
+		log.info("hablame manitoooooooooooooooooooooooooooo");
     	log.info("handleHttpMessageNotReadable");
     	log.info("headers: "+headers);
     	log.info("status: "+status);
