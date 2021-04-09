@@ -94,6 +94,70 @@ public class MonedaServiceImpl implements IMonedaService {
 	}
 
 	@Override
+	public MonedaDtoResponse findAllDtoResponse() {
+		MonedaDtoResponse response = new MonedaDtoResponse();
+		Resultado resultado = new Resultado();
+		resultado.setCodigo(CodRespuesta.C0000);
+		resultado.setDescripcion(Constantes.BLANK);
+		List<MonedaDto> listMonedasDto = repo.getAll();
+		
+		if (listMonedasDto.isEmpty()) {
+			resultado.setCodigo(CodRespuesta.C0001);
+			resultado.setDescripcion(env.getProperty(Constantes.RES + resultado.getCodigo(), resultado.getCodigo()));
+		} else {
+			resultado.setDescripcion(env.getProperty(Constantes.RES + resultado.getCodigo(), resultado.getCodigo()));
+		}
+		
+		response.setResultado(resultado);
+		response.setListMonedasDto(repo.getAll());
+
+		return response;
+	}
+	
+	@Override
+	public MonedaDtoResponse getMonedasByParameter(String codMoneda, boolean flagActivo) {
+		MonedaDtoResponse response = new MonedaDtoResponse();
+		Resultado resultado = new Resultado();
+		resultado.setCodigo(CodRespuesta.C0000);
+		resultado.setDescripcion(Constantes.BLANK);
+		List<MonedaDto> listMonedasDto = repo.getMonedaByidAndFlag(codMoneda, flagActivo);
+		
+		if (listMonedasDto.isEmpty()) {
+			resultado.setCodigo(CodRespuesta.C0001);
+			resultado.setDescripcion(env.getProperty(Constantes.RES + resultado.getCodigo(), resultado.getCodigo()));
+		} else {
+			resultado.setDescripcion(env.getProperty(Constantes.RES + resultado.getCodigo(), resultado.getCodigo()));
+		}
+		
+		response.setResultado(resultado);
+		response.setListMonedasDto(repo.getAll());
+
+		return response;
+	}
+	
+	@Override
+	public MonedaDtoResponse getMonedasByFlagActivo(boolean flagActivo) {
+		MonedaDtoResponse response = new MonedaDtoResponse();
+		Resultado resultado = new Resultado();
+		resultado.setCodigo(CodRespuesta.C0000);
+		resultado.setDescripcion(Constantes.BLANK);
+		List<MonedaDto> listMonedasDto = repo.getMonedaByFlagActivo(flagActivo);
+		
+		if (listMonedasDto.isEmpty()) {
+			resultado.setCodigo(CodRespuesta.C0001);
+			resultado.setDescripcion(env.getProperty(Constantes.RES + resultado.getCodigo(), resultado.getCodigo()));
+		} else {
+			resultado.setDescripcion(env.getProperty(Constantes.RES + resultado.getCodigo(), resultado.getCodigo()));
+		}
+		
+		response.setResultado(resultado);
+		response.setListMonedasDto(repo.getAll());
+
+		return response;
+	}
+	
+	
+	@Override
 	public MonedaDtoResponse get(String codMoneda) {
 		MonedaDtoResponse response = new MonedaDtoResponse();
 		Resultado resultado = new Resultado();
@@ -353,6 +417,12 @@ public class MonedaServiceImpl implements IMonedaService {
 		return resultado;
 		
 	}
+
+	
+
+	
+
+	
 	
 	
 	

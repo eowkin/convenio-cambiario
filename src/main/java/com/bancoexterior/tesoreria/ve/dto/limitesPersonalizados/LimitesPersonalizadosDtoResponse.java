@@ -17,6 +17,7 @@ public class LimitesPersonalizadosDtoResponse implements Serializable{
 	
 	public LimitesPersonalizadosDtoResponse() {
 		super();
+		this.resultado = new Resultado();
 		listLimitesPersonalizadosDto = new ArrayList<LimitesPersonalizadosDto>();
 	}
 	

@@ -1,53 +1,40 @@
 package com.bancoexterior.tesoreria.ve.dto.limitesPersonalizados;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import com.bancoexterior.tesoreria.ve.config.Codigos.CodRespuesta;
+import com.bancoexterior.tesoreria.ve.config.Codigos.ParamConfig;
+import com.bancoexterior.tesoreria.ve.dto.limitesGenerales.LimitesGeneralesDtoRequestConsulta;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class LimitesPersonalizadosDto implements Serializable{
+public class LimitesPersonalizadosDtoRequestConsulta implements Serializable{
 
 	@JsonProperty("codIbs")
 	private String codIbs;
-	
+
 	@JsonProperty("codMoneda")
+	@NotEmpty(message=CodRespuesta.CDE1004)
+	@Pattern(regexp=ParamConfig.CODMONEDA, message=CodRespuesta.CDE1004)
 	private String codMoneda;
 	
 	@JsonProperty("tipoTransaccion")
 	private String tipoTransaccion;
-	
-	@JsonProperty("montoMin")
-	private Double montoMin;
-	
-	@JsonProperty("montoMax")
-	private Double montoMax;
-	
-	@JsonProperty("montoTope")
-	private Double montoTope;
-	
-	@JsonProperty("montoMensual")
-	private Double montoMensual;
-	
-	@JsonProperty("montoDiario")
-	private Double montoDiario;
-	
+		
 	@JsonProperty("flagActivo")
 	private Boolean flagActivo;
-	
-	@JsonProperty("codUsuario")
-	private String codUsuario;
-	
-	@JsonProperty("fechaModificacion")
-	private Date fechaModificacion;
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 }

@@ -30,7 +30,7 @@ import com.bancoexterior.tesoreria.ve.dto.MonedasDtoRequest;
 import com.bancoexterior.tesoreria.ve.dto.MonedasRequest;
 import com.bancoexterior.tesoreria.ve.dto.Resultado;
 import com.bancoexterior.tesoreria.ve.entities.Moneda;
-import com.bancoexterior.tesoreria.ve.exception.InvalidDataException;
+import com.bancoexterior.tesoreria.ve.exception.prueba.FieldAlreadyExistException;
 import com.bancoexterior.tesoreria.ve.service.IMonedaService;
 import com.bancoexterior.tesoreria.ve.util.Mapper;
 import com.bancoexterior.tesoreria.ve.util.Utils;
@@ -60,7 +60,9 @@ public class MonedaController {
 	//public ResponseEntity<Object> listAllMonedas(@Valid @RequestBody DatosRequestConsulta datosRequestConsulta,
 	public ResponseEntity<Object> listAllMonedas(@RequestBody MonedasRequest monedasRequest,
 			HttpServletRequest requestHTTP) {
-
+		
+		//int valor = 1/0;
+		
 		log.info(Servicios.MONEDASCONTROLLERI);
 		log.info("MonedasRequest: " + monedasRequest);
 		MonedaDtoResponse monedaDtoResponse;
@@ -81,11 +83,70 @@ public class MonedaController {
 	}
 	
 	
+	@GetMapping(path = Servicios.MONEDASURLV1+"/todas", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> getAllMonedaResponse(@Valid @RequestBody DatosRequestConsulta datosRequestConsulta,
+			HttpServletRequest requestHTTP) {
+		
+		log.info(Servicios.MONEDASCONTROLLERI);
+		log.info("datosRequestConsulta: " + datosRequestConsulta);
+		MonedaDtoResponse monedaDtoResponse;
+		monedaDtoResponse = monedaService.findAllDtoResponse();
+		
+		log.info("monedaDtoResponse: "+monedaDtoResponse);
+		log.info(Servicios.MONEDASCONTROLLERF);		return ResponseEntity.ok(monedaDtoResponse);
+	}
 	
 	
 	
+	@GetMapping(path = Servicios.MONEDASPARAMURLV1, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> getMonedaByParams(@Valid @RequestBody DatosRequestConsulta datosRequestConsulta,
+			@PathVariable("codMoneda") String codMoneda, @PathVariable("flagActivo") boolean flagActivo, HttpServletRequest requestHTTP) {
+		
+		log.info(Servicios.MONEDASCONTROLLERI);
+		log.info("datosRequestConsulta: " + datosRequestConsulta);
+		log.info("codMoneda: " + codMoneda);
+		log.info("flagAvtivo: " + flagActivo);
+
+		MonedaDtoResponse monedaDtoResponse;
+		monedaDtoResponse = monedaService.getMonedasByParameter(codMoneda, flagActivo);
+		
+		log.info("monedaDtoResponse: "+monedaDtoResponse);
+		log.info(Servicios.MONEDASCONTROLLERF);		return ResponseEntity.ok(monedaDtoResponse);
+	}
 	
+	@GetMapping(path = Servicios.MONEDAIDURLV1, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> getMonedaByCodMoneda(@Valid @RequestBody DatosRequestConsulta datosRequestConsulta,
+			@PathVariable("codMoneda") String codMoneda, HttpServletRequest requestHTTP) {
+		
+		log.info(Servicios.MONEDASCONTROLLERI);
+		log.info("datosRequestConsulta: " + datosRequestConsulta);
+		log.info("codMoneda: " + codMoneda);
+
+		MonedaDtoResponse monedaDtoResponse = new MonedaDtoResponse();
+		monedaDtoResponse = monedaService.get(codMoneda);
+		
+		log.info("monedaDtoResponse: "+monedaDtoResponse);
+		log.info(Servicios.MONEDASCONTROLLERF);		return ResponseEntity.ok(monedaDtoResponse);
+	}
 	
+	@GetMapping(path = Servicios.MONEDASFLAGACTIVOURLV1, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<Object> getMonedasByFlagActivo(@Valid @RequestBody DatosRequestConsulta datosRequestConsulta,
+			@PathVariable("flagActivo") boolean flagActivo, HttpServletRequest requestHTTP) {
+		
+		log.info(Servicios.MONEDASCONTROLLERI);
+		log.info("datosRequestConsulta: " + datosRequestConsulta);
+		log.info("codMoneda: " + flagActivo);
+
+		MonedaDtoResponse monedaDtoResponse = new MonedaDtoResponse();
+		monedaDtoResponse = monedaService.getMonedasByFlagActivo(flagActivo);
+		
+		log.info("monedaDtoResponse: "+monedaDtoResponse);
+		log.info(Servicios.MONEDASCONTROLLERF);		return ResponseEntity.ok(monedaDtoResponse);
+	}
 	
 	
 	
@@ -121,13 +182,22 @@ public class MonedaController {
 		MonedaDtoResponse monedaDtoResponse = new MonedaDtoResponse();
 		log.info("monedaService.findById(monedaDtoRequest.getCodMoneda()) : "+monedaService.findById(monedasRequest.getMonedasDtoRequest().getCodMoneda()));
 		
+		if(monedaService.existsById(monedasRequest.getMonedasDtoRequest().getCodMoneda())) {
+			log.info("existe");
+			throw new FieldAlreadyExistException("codMoneda: "+monedasRequest.getMonedasDtoRequest().getCodMoneda());
+		}else {
+			monedaDtoResponse = monedaService.save(monedasRequest);
+		}
+			
+		
+		/*
 		if(monedaService.findById(monedasRequest.getMonedasDtoRequest().getCodMoneda()) == null) {
 			log.info("No existe ese codigo, se puede hacer el insert");
 			monedaDtoResponse = monedaService.save(monedasRequest);
 			
 		}else {
 			log.info("Existe en Base de datos ese Codigo");
-		}
+		}*/
 		
 		return  ResponseEntity.status( HttpStatus.CREATED).body(monedaDtoResponse);
 		
@@ -135,7 +205,7 @@ public class MonedaController {
 	
 	@PostMapping(path=Servicios.PRUEBAMONEDASURLV1, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<Object> crearMoneda2(@Valid @RequestBody MonedasRequest monedasRequest, BindingResult result, HttpServletRequest requestHTTP) {
+	public ResponseEntity<Object> crearMoneda2(@Valid @RequestBody MonedasRequest monedasRequest, HttpServletRequest requestHTTP) {
 		
 		log.info(Servicios.MONEDASSERVICEI);
 		log.info("monedasRequest: " + monedasRequest);
@@ -144,9 +214,7 @@ public class MonedaController {
 		
 		
 		log.debug("Creando usuario con data {}", monedaDtoResponse);
-		if (result.hasErrors()) {
-		  throw new InvalidDataException(result);
-		}
+		
 		//usuario = usuarioService.create(usuario);
 		
 		/*
@@ -169,21 +237,7 @@ public class MonedaController {
 	
 	
 	
-	@GetMapping(path = Servicios.MONEDAIDURLV1, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<Object> getMoneda(@Valid @RequestBody DatosRequestConsulta datosRequestConsulta,
-			@PathVariable("codMoneda") String codMoneda, HttpServletRequest requestHTTP) {
-		
-		log.info(Servicios.MONEDASCONTROLLERI);
-		log.info("datosRequestConsulta: " + datosRequestConsulta);
-		log.info("codMoneda: " + codMoneda);
-
-		MonedaDtoResponse monedaDtoResponse = new MonedaDtoResponse();
-		monedaDtoResponse = monedaService.get(codMoneda);
-		
-		log.info("monedaDtoResponse: "+monedaDtoResponse);
-		log.info(Servicios.MONEDASCONTROLLERF);		return ResponseEntity.ok(monedaDtoResponse);
-	}
+	
 
 	@GetMapping(path = Servicios.PRUEBAMONEDAIDURLV1, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

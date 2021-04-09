@@ -111,18 +111,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	    return handleExceptionInternal(ex, response, headers, status, request);
 	}
 
-	@Override
-	protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
-			HttpStatus status, WebRequest request) {
-
-		
-		log.info("hablame manitoooooooooooooooooooooooooooo");
-    	log.info("handleHttpMessageNotReadable");
-    	log.info("headers: "+headers);
-    	log.info("status: "+status);
-    	log.info("request: "+request);
-		return super.handleNoHandlerFoundException(ex, headers, status, request);
-	}
+	
     
     
     

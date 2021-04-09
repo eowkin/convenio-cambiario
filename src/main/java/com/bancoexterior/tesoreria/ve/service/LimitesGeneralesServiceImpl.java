@@ -118,71 +118,119 @@ public class LimitesGeneralesServiceImpl implements ILimitesGeneralesService{
 		log.info("limitesGeneralesDtoConsulta.getNaturaleza(): "+limitesGeneralesDtoConsulta.getNaturaleza());
 		log.info("limitesGeneralesDtoConsulta.getFlagActivo(): "+limitesGeneralesDtoConsulta.getFlagActivo());
 		
+		//Todas
 		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
 				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
 			limitesGeneralesDto = repo.getAll();
 			log.info(""+limitesGeneralesDto.size());
 		}
 		
-		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
-				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
-			limitesGeneralesDto = repo.getById(limitesGeneralesDtoConsulta.getCodMoneda(), limitesGeneralesDtoConsulta.getTipoTransaccion(), limitesGeneralesDtoConsulta.getNaturaleza());
-			log.info(""+limitesGeneralesDto.size());
-		}
-		
-		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
-				&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
-			limitesGeneralesDto = repo.getByCodMonedaAndTipoTransaccion(limitesGeneralesDtoConsulta.getCodMoneda(), limitesGeneralesDtoConsulta.getTipoTransaccion());
-			log.info(""+limitesGeneralesDto.size());
-		}
-		
+		//codMoneda
 		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
 				&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
 			limitesGeneralesDto = repo.getByCodMoneda(limitesGeneralesDtoConsulta.getCodMoneda());
 			log.info(""+limitesGeneralesDto.size());
 		}
 		
-		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
-				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
-			limitesGeneralesDto = repo.getByTipoTrasaccionAndNaturaleza(limitesGeneralesDtoConsulta.getTipoTransaccion(), limitesGeneralesDtoConsulta.getNaturaleza());
+		//codMonedaAndtipoTransaccion
+		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
+			limitesGeneralesDto = repo.getByCodMonedaAndTipoTransaccion(limitesGeneralesDtoConsulta.getCodMoneda(), limitesGeneralesDtoConsulta.getTipoTransaccion());
 			log.info(""+limitesGeneralesDto.size());
 		}
 		
-		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
-				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
-			limitesGeneralesDto = repo.getByTipoTrasaccionAndNaturalezaAndFlagActivo(limitesGeneralesDtoConsulta.getTipoTransaccion(), limitesGeneralesDtoConsulta.getNaturaleza(), limitesGeneralesDtoConsulta.getFlagActivo());
-			log.info(""+limitesGeneralesDto.size());
-		}
-		
-		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
-				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
-			limitesGeneralesDto = repo.getByNaturaleza(limitesGeneralesDtoConsulta.getNaturaleza());
-			log.info(""+limitesGeneralesDto.size());
-		}
-		
+		//codMonedaAndNaturaleza
 		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
 				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
 			limitesGeneralesDto = repo.getByCodMonedaAndNaturaleza(limitesGeneralesDtoConsulta.getCodMoneda(), limitesGeneralesDtoConsulta.getNaturaleza());
 			log.info(""+limitesGeneralesDto.size());
 		}
 		
+		//codMonedaAndFlagActivo
+		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
+			limitesGeneralesDto = repo.getByCodMonedaAndFlagActivo(limitesGeneralesDtoConsulta.getCodMoneda(), limitesGeneralesDtoConsulta.getFlagActivo());
+			log.info(""+limitesGeneralesDto.size());
+		}
+		
+		//codMonedaAndTipoTransaccionAndNaturaleza
+		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
+			limitesGeneralesDto = repo.getById(limitesGeneralesDtoConsulta.getCodMoneda(), limitesGeneralesDtoConsulta.getTipoTransaccion(), limitesGeneralesDtoConsulta.getNaturaleza());
+			log.info(""+limitesGeneralesDto.size());
+		}
+		
+		//codMOnedaAndNaturalezaAndFlagActivo
+		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
+			limitesGeneralesDto = repo.getByCodMonedaAndNaturalezaAndFlagActivo(limitesGeneralesDtoConsulta.getCodMoneda(), limitesGeneralesDtoConsulta.getNaturaleza(), limitesGeneralesDtoConsulta.getFlagActivo());
+			log.info(""+limitesGeneralesDto.size());
+		}
+		
+		//codMOnedaAndTipoTransaccionAndFlagActivo
+		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
+			limitesGeneralesDto = repo.getByCodMonedaAndTipoTransaccionAndFlagActivo(limitesGeneralesDtoConsulta.getCodMoneda(), limitesGeneralesDtoConsulta.getTipoTransaccion(), limitesGeneralesDtoConsulta.getFlagActivo());
+			log.info(""+limitesGeneralesDto.size());
+		}
+		
+		//tipoTransaccion
+		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
+			limitesGeneralesDto = repo.getByTipoTrasaccion(limitesGeneralesDtoConsulta.getTipoTransaccion());
+			log.info(""+limitesGeneralesDto.size());
+		}
+		
+		//tipoTransaccionAndNaturaleza
+		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
+			limitesGeneralesDto = repo.getByTipoTrasaccionAndNaturaleza(limitesGeneralesDtoConsulta.getTipoTransaccion(), limitesGeneralesDtoConsulta.getNaturaleza());
+			log.info(""+limitesGeneralesDto.size());
+		}
+		
+		//tipoTransaccionAndFlagActivo
+		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
+			limitesGeneralesDto = repo.getByTipoTransaccionAndFlagActivo(limitesGeneralesDtoConsulta.getTipoTransaccion(), limitesGeneralesDtoConsulta.getFlagActivo());
+			log.info(""+limitesGeneralesDto.size());
+		}
+		
+		//tipoTransaccionAndNaturalezAndFlagActivo
+		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() != null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
+			limitesGeneralesDto = repo.getByTipoTrasaccionAndNaturalezaAndFlagActivo(limitesGeneralesDtoConsulta.getTipoTransaccion(), limitesGeneralesDtoConsulta.getNaturaleza(), limitesGeneralesDtoConsulta.getFlagActivo());
+			log.info(""+limitesGeneralesDto.size());
+		}
+		
+		//naturaleza
+		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
+				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
+			limitesGeneralesDto = repo.getByNaturaleza(limitesGeneralesDtoConsulta.getNaturaleza());
+			log.info(""+limitesGeneralesDto.size());
+		}
+		
+		
+		//naturalezaAndFlagActivo
 		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
 				&& limitesGeneralesDtoConsulta.getNaturaleza() != null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
 			limitesGeneralesDto = repo.getByNaturalezaAndFlagActivo(limitesGeneralesDtoConsulta.getNaturaleza(), limitesGeneralesDtoConsulta.getFlagActivo());
 			log.info(""+limitesGeneralesDto.size());
 		}
 		
+		//flagActivo
 		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
 				&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
 			limitesGeneralesDto = repo.getByFlagActivo(limitesGeneralesDtoConsulta.getFlagActivo());
 			log.info(""+limitesGeneralesDto.size());
 		}
 		
-		if (limitesGeneralesDtoConsulta.getCodMoneda() != null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
-				&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() != null) {
-			limitesGeneralesDto = repo.getByCodMonedaAndFlagActivo(limitesGeneralesDtoConsulta.getCodMoneda(), limitesGeneralesDtoConsulta.getFlagActivo());
+		//all-Todos los valores null
+		if (limitesGeneralesDtoConsulta.getCodMoneda() == null && limitesGeneralesDtoConsulta.getTipoTransaccion() == null 
+			&& limitesGeneralesDtoConsulta.getNaturaleza() == null && limitesGeneralesDtoConsulta.getFlagActivo() == null) {
+			limitesGeneralesDto = repo.getAll();
 			log.info(""+limitesGeneralesDto.size());
 		}
+		
 		return limitesGeneralesDto;
 	}
 	
@@ -219,6 +267,7 @@ public class LimitesGeneralesServiceImpl implements ILimitesGeneralesService{
 				log.info("antes de llamara validaConsulta");
 				//Validar Respuesta
 				resultado = validaConsulta(listLimitesGeneralesDto);
+				log.info("luego de llamara validaConsulta");
 				codigo = resultado.getCodigo();
 				errorCM = resultado.getDescripcion();
 			}

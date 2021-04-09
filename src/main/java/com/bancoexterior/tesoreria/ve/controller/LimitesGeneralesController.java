@@ -74,13 +74,13 @@ public class LimitesGeneralesController {
 	public ResponseEntity<Object> getIdLimitesGeneralesResponse(@Valid @RequestBody DatosRequestConsulta datosRequestConsulta, @PathVariable String codMoneda,
 			@PathVariable String tipoTransaccion,@PathVariable String naturaleza, 
 			HttpServletRequest requestHTTP){
-		log.info("[==== INICIO Convenio n° 1 Tasa - Controller ====]");
+		log.info("[==== INICIO Convenio n° 1 LimitesGenerales - Controller ====]");
 		log.info("datosRequestConsulta: " + datosRequestConsulta);
 		log.info("codMoneda: "+codMoneda);
 		log.info("tipoTransaccion: "+tipoTransaccion);
 		log.info("naturaleza: "+naturaleza);
 		LimitesGeneralesDtoResponse response  = limitesService.getLimitesGeneralesByParameter(codMoneda, tipoTransaccion, naturaleza);
-		log.info("[==== FIN Convenio n° 1 Monedas - Controller ====]");
+		log.info("[==== FIN Convenio n° 1 LimitesGenerales - Controller ====]");
 		return ResponseEntity.ok(response);
 	}
 	
@@ -88,14 +88,14 @@ public class LimitesGeneralesController {
 	public ResponseEntity<Object> getAllParameterLimitesGeneralesResponse(@Valid @RequestBody DatosRequestConsulta datosRequestConsulta, @PathVariable String codMoneda,
 			@PathVariable String tipoTransaccion,@PathVariable String naturaleza, @PathVariable boolean flagActivo, 
 			HttpServletRequest requestHTTP){
-		log.info("[==== INICIO Convenio n° 1 Tasa - Controller ====]");
+		log.info("[==== INICIO Convenio n° 1 LimitesGenerales - Controller ====]");
 		log.info("datosRequestConsulta: " + datosRequestConsulta);
 		log.info("codMoneda: "+codMoneda);
 		log.info("tipoTransaccion: "+tipoTransaccion);
 		log.info("naturaleza: "+naturaleza);
 		log.info("flagActivo: "+flagActivo);
 		LimitesGeneralesDtoResponse response  = limitesService.getLimitesGeneralesByAllParameter(codMoneda, tipoTransaccion, naturaleza, flagActivo);
-		log.info("[==== FIN Convenio n° 1 Monedas - Controller ====]");
+		log.info("[==== FIN Convenio n° 1 LimitesGenerales - Controller ====]");
 		return ResponseEntity.ok(response);
 	}
 	

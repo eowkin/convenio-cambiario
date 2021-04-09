@@ -23,5 +23,8 @@ public interface IMonedaService {
 	public List<MonedaDto> findAllMonedasDto(MonedaDto monedaDto);
 	public List<MonedaDto> findAllGlobalMapper();
 	public MonedaDtoResponse getAll();
+	public MonedaDtoResponse findAllDtoResponse();
 	public MonedaDtoResponse get(String codMoneda);
+	public MonedaDtoResponse getMonedasByParameter(String codMoneda, boolean flagActivo);
+	public MonedaDtoResponse getMonedasByFlagActivo(boolean flagActivo);
 }
